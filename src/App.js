@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import { useState } from "react";
 import "./App.css";
 import { Profile } from "./Profile";
@@ -13,7 +12,7 @@ import { ShoppingList } from "./ShoppingList";
 
 function MyButton() {
   const [showProfile, setshowProfile] = useState(false);
-
+  //in React any variable can take using useState() hook.
   const handleClick = () => {
     // alert("Button Clicked");
     setshowProfile(true);
@@ -26,34 +25,27 @@ function MyButton() {
       <button
         onClick={handleClick}
         style={{ border: "2px solid red" }}
-        className="My-button"
+        className="My-button" //here external css className written
       >
         Click here to showProfile
       </button>
-      <button onClick={handleHideClick}>Click here to hide profile</button>
+      <button
+        onClick={handleHideClick}
+        style={{ border: "2px solid blue" }}
+        className="My-button" //here external css className written
+      >
+        Click here to hide profile
+      </button>
+       {/* below given logic in JS which tell us that if first condition true then go to 2nd condition and render profile componant*/}
       {showProfile && <Profile />}
     </>
   );
 }
 function MyProjectBody() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Profile />
-        <MyButton />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Profile />
+      <MyButton />
     </div>
   );
 }
@@ -61,10 +53,18 @@ function MyProjectBody() {
 // for displaying MyProjectBody component makes isAdmin variable value true.
 function App() {
   const isAdmin = false;
-  return <>
-  <ShoppingList/>
-  {isAdmin ? <MyProjectBody /> : <MyButton />}
-  </>;
+  return (
+    <>
+      <ShoppingList />
+      {
+        isAdmin ? (
+          <MyProjectBody />
+        ) : (
+          <MyButton />
+        ) /*JS code written here in {} i.e. conditional redering*/
+      }
+    </>
+  );
 }
 
 export default App;
